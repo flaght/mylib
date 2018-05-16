@@ -537,7 +537,7 @@ class XmlNode *XMLValueSerializer::XmlToXmlTree(std::string &XmlStr,
 
   class XmlNode *cur_node = new XmlNode();
   if (cur_node == NULL) {
-    LOG_DEBUG2("%s", "内存分配出错");
+    ULOG_DEBUG2("%s", "内存分配出错");
     return NULL;
   }
 
@@ -604,14 +604,14 @@ class XmlNode *XMLValueSerializer::XmlToXmlTree(std::string &XmlStr,
 
 bool XMLValueSerializer::MergeTree(class XmlNode * XmlRoot) {
   if (XmlRoot == NULL) {
-    LOG_DEBUG2("函数MergeTree:%s", "传入了空指针");
+    ULOG_DEBUG2("函数MergeTree:%s", "传入了空指针");
     return false;
   }
 
   int ChildMax = XmlRoot->child.size();
   for (int i = 0; i < ChildMax; ++i) {
     if (!MergeTree(XmlRoot->child[i])) {
-      LOG_DEBUG2("函数MergeTree:%s", "子节点出错");
+      ULOG_DEBUG2("函数MergeTree:%s", "子节点出错");
       return false;
     }
   }
@@ -642,7 +642,7 @@ bool XMLValueSerializer::MergeTree(class XmlNode * XmlRoot) {
         key = XmlRoot->child[(it->second)[0]]->key;  //  获取list的key
         base_logic::ListValue *l = new base_logic::ListValue();
         if (NULL == l) {
-          LOG_DEBUG2("MergeTree:%s", "内存分配出错");
+          ULOG_DEBUG2("MergeTree:%s", "内存分配出错");
           return false;
         }
 
@@ -668,7 +668,7 @@ bool XMLValueSerializer::MergeTree(class XmlNode * XmlRoot) {
 Value *XMLValueSerializer::XmlTreeToValue(class XmlNode * XmlRoot) {
   bool r = MergeTree(XmlRoot);
   if (r == false) {
-    LOG_DEBUG2("函数 XmlTreeToValue:%s", "合并出错");
+    ULOG_DEBUG2("函数 XmlTreeToValue:%s", "合并出错");
     return NULL;
   }
 

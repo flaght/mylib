@@ -141,7 +141,7 @@ bool PushBaiduConnectorImpl::PushUserMessage(const std::string& url,const int32 
 	if(!r)
 		return false;
 
-	LOG_DEBUG2("message %s",message.c_str());
+	ULOG_DEBUG2("message %s",message.c_str());
 	base_push::BaiDuPushMsgInfo push_msg;
 	push_msg.set_method("POST");
 	push_msg.set_url(url);
@@ -230,7 +230,7 @@ bool PushBaiduConnectorImpl::PushBaiduMsg(const std::string& url,const std::stri
 	bool r = http_post.Post(content.c_str(),0,false);
 	r = http_post.GetContent(reponse);
 
-	LOG_DEBUG2("%s",reponse.c_str());
+	ULOG_DEBUG2("%s",reponse.c_str());
 	return r;
 }
 
@@ -287,7 +287,7 @@ void PushBaiduConnectorImpl::TestSign(){
 	       ++iter) {
 		 os3<<iter->first<<"="<<iter->second;
 	  }
-	 LOG_DEBUG2("%s",os3.str().c_str());
+	 ULOG_DEBUG2("%s",os3.str().c_str());
 
 	/*os<<"POSThttp://channel.api.duapp.com/rest/2.0/channel/channelapikey=Yw3DNoCNaW3PtOzKXsOolp4cchannel_id="
 			<<4209320236570070120<<"message_type=1messages="<<message<<"method=push_msgmsg_keys="
@@ -301,9 +301,9 @@ void PushBaiduConnectorImpl::TestSign(){
 	base::BasicUtil::UrlEncode(content,url_content);
 	base::MD5Sum md5sum(url_content);
 	hexdigest = md5sum.GetHash();
-	LOG_DEBUG2("%s",content.c_str());
-	LOG_DEBUG2("%s",url_content.c_str());
-	LOG_DEBUG2("%s",hexdigest.c_str());
+	ULOG_DEBUG2("%s",content.c_str());
+	ULOG_DEBUG2("%s",url_content.c_str());
+	ULOG_DEBUG2("%s",hexdigest.c_str());
 
 	//测试
 	base_push::BaiDuPushMsgInfo msgsign;
@@ -321,7 +321,7 @@ void PushBaiduConnectorImpl::TestSign(){
 	msgsign.set_value("apikey","Yw3DNoCNaW3PtOzKXsOolp4c");
 	std::string getsign;
 	msgsign.GetSign(getsign);
-	LOG_DEBUG2("======%s=======",getsign.c_str());
+	ULOG_DEBUG2("======%s=======",getsign.c_str());
 
 	//发送
 	http::HttpMethodPost http_post(url);
@@ -341,7 +341,7 @@ void PushBaiduConnectorImpl::TestSign(){
 
 	r = http_post.GetContent(reply_content);
 
-	LOG_DEBUG2("%s",reply_content.c_str());
+	ULOG_DEBUG2("%s",reply_content.c_str());
 }
 
 

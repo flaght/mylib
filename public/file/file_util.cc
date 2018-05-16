@@ -1,4 +1,5 @@
 #include "file_util.h"
+#include "log/mig_log.h"
 #include <dirent.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -52,10 +53,12 @@ bool ReadFileToString(const FilePath& path, std::string* contents) {
 
 int WriteFile(const FilePath& filename,const char* data,int size){
     int ret = 0;
-	  //int fd = creat(filename.value().c_str(),0666);
-	  int fd = open(filename.value().c_str(),O_CREAT|O_APPEND|O_WRONLY,S_IRWXU|S_IRWXG|S_IRWXO);
-    if(fd<0)
+	//int fd = creat(filename.value().c_str(),0666);
+	int fd = open(filename.value().c_str(),O_CREAT|O_APPEND|O_WRONLY,S_IRWXU|S_IRWXG|S_IRWXO);
+    if(fd < 0) {
+        MIG_ERROR(USER_LEVEL,"creat eroor %s",strerror(errno));
         return -1;
+    }
     int bytes_written = WriteFileDescriptor(fd,data,size);
     //if((ret =HANDLER_EINTR(close(fd)))<0);
         //return ret;
@@ -153,16 +156,18 @@ bool DirectoryExists(const FilePath& path){
 }
 
 bool GetDirectoryFile(const FilePath& path, std::list<FilePath>& file_list) {
-	DIR* dir = opendir(path.value().c_str());
-	if (!dir)
+	MIG_DEBUG(USER_LEVEL,"GetDirectoryFile start");
+    DIR* dir = opendir(path.value().c_str());
+	if (!dir){
+        MIG_DEBUG(USER_LEVEL,"dir nulll");
 		return false;
+    }
 #if 0
 #error Port warning: depending on the definition of struct dirent, \
          additional space for pathname may be needed
 #endif
 	struct dirent dent_buf;
 	struct dirent* dent;
-
 	while (readdir_r (dir, &dent_buf, &dent) == 0 && (dent)) {
 		if ((strcmp(dent->d_name, ".") == 0) ||
 				(strcmp(dent->d_name, "..") == 0))
@@ -172,8 +177,9 @@ bool GetDirectoryFile(const FilePath& path, std::list<FilePath>& file_list) {
 		else if (dent->d_type == DT_DIR){
 			FilePath sub_path(path.value()+ "/" + std::string(dent->d_name));
 			GetDirectoryFile(sub_path, file_list);
-		}else if (dent->d_type == DT_REG) {
-			FilePath file_path(path.value() + "/" + std::string(dent->d_name));
+		}else if (dent->d_type == DT_REG || dent->d_type == DT_UNKNOWN ) {
+			
+            FilePath file_path(path.value() + "/" + std::string(dent->d_name));
 			file_list.push_back(file_path);
 		}
 

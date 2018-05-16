@@ -260,7 +260,7 @@ public:
   virtual int AppendCommandV(const char *format, ...) {return 0;}
   virtual bool GetPipleReply(size_t cmd_size, std::list<CommandReply*> &reply_list_out){return true;}
 
-	virtual void *GetContext() {}
+	virtual void *GetContext() {return NULL;}
 };
 
 }

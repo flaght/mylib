@@ -1,6 +1,7 @@
 #include "mig_log.h"
 #include "file/file_util.h"
 #include <pthread.h>
+#include <syslog.h>
 
 #define _LOG_LEN        512
 #define _LOG_LENGTH     2048

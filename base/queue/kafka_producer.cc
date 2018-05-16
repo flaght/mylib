@@ -1,5 +1,5 @@
 #include "kafka_producer.h"
-
+#include "logic/logic_comm.h"
 int kafka_producer::state_ = 0;
 
 kafka_producer::kafka_producer() {
@@ -61,6 +61,7 @@ int kafka_producer::Init(const int partition, const char* topic,
     rd_kafka_destroy(rk_);
     return PRODUCER_INIT_FAILED;
   }
+                             
   rd_kafka_set_log_level(rk_, LOG_ERR);
 
   rd_kafka_topic_conf_t* topic_conf = rd_kafka_topic_conf_new();

@@ -35,7 +35,7 @@ bool LBSDBComm::GetBaiduAcessKey(const int64 platform_id,std::list<base_lbs::Bai
     //call proc_GetBaiduAcessKey();
 	os<<"call proc_GetBaiduAccessKey()";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
@@ -48,7 +48,7 @@ bool LBSDBComm::GetBaiduAcessKey(const int64 platform_id,std::list<base_lbs::Bai
 	if(num>0){
 		while(rows = (*(MYSQL_ROW*)(engine->FetchRows())->proc)){
 			std::string access_token = rows[0];
-			LOG_DEBUG2("access_token %s",access_token.c_str());
+			ULOG_DEBUG2("access_token %s",access_token.c_str());
 			base_lbs::BaiDuAccessKey access_key_info(access_token);
 			list.push_front(access_key_info);
 		}

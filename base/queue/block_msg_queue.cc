@@ -97,7 +97,7 @@ bool BaseBlockMsgQueue::AddBlockMsgQueue(base_queue::BlockMsg* value){
 	os<<name<<":"<<type;
 	//等级
 	key = os.str();
-	LOG_DEBUG2("key [%s]",key.c_str());
+	ULOG_DEBUG2("key [%s]",key.c_str());
 	return AddBlockMsgQueue(key,type,value);
 }
 

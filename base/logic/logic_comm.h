@@ -4,14 +4,14 @@
 #include "thread/base_thread_handler.h"
 #include "thread/base_thread_lock.h"
 
-#if defined _DEBUG || defined DEBUG
-#define LOG_DEBUG(s)        \
+#if defined _DEBUG || USER_LOG_DEBUG
+#define ULOG_DEBUG(s)        \
 	MIG_DEBUG (USER_LEVEL, "%s", s)
-#define LOG_DEBUG2(f, ...)  \
+#define ULOG_DEBUG2(f, ...)  \
 	MIG_DEBUG (USER_LEVEL, f, __VA_ARGS__)
 #else
-#define LOG_DEBUG(s)
-#define LOG_DEBUG2(f, ...)
+#define ULOG_DEBUG(s)
+#define ULOG_DEBUG2(f, ...)
 #endif
 
 #if defined USR_LOG_ERROR

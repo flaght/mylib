@@ -49,7 +49,7 @@ bool QueueDicComm::GetBlockQueueMessage(const std::string& key,std::list<std::st
 		if(!r)
 			return true;
 		std::string str(val,val_len);
-		LOG_DEBUG2("%s",str.c_str());
+		ULOG_DEBUG2("%s",str.c_str());
 		list.push_back(str);
 		temp_count--;
 	}
@@ -66,7 +66,7 @@ bool QueueDicComm::GetBlockQueueMessage(const std::string& key,std::string& str)
 	if(!r)
 		return false;
 	str.assign(val,val_len);
-	LOG_DEBUG2("%s",str.c_str());
+	ULOG_DEBUG2("%s",str.c_str());
 	return true;
 }
 

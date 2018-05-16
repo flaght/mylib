@@ -71,6 +71,21 @@ void DataOutPacket::Write64(int64 lw){
 	cursor_ += sizeof(lw);
 
 }
+void DataOutPacket::WritePtr(void* ptr) {
+    if (cursor_ - buffer_ + sizeof(ptr) > buffer_length_){
+		int32 filled = cursor_ - buffer_;
+		buffer_length_ = (int32) (cursor_ - buffer_ + sizeof(ptr)) * 2;
+		buffer_ = (char*)realloc(buffer_,buffer_length_);
+		if (buffer_==NULL){
+			buffer_length_ = 0;
+			Reset();
+			return;
+		}
+		cursor_ = buffer_ + filled;
+	}
+    *(void**) cursor_ = ptr;
+	cursor_ += sizeof(ptr);
+}
 
 void DataOutPacket::WriteData(const char* buf,const int32 len){
 	if(cursor_ - buffer_ + len > buffer_length_)
@@ -183,6 +198,16 @@ int64 DataInPacket::Read64()
 		cursor_ += sizeof(lw);
 	}
 	return lw;
+}
+
+void* DataInPacket::ReadPtr() {
+    void* ptr = NULL;
+	if (data_len_ - (cursor_ - data_) >= sizeof(ptr))
+	{
+		ptr = *(void* *) cursor_;
+		cursor_ += sizeof(ptr);
+	}
+	return ptr;
 }
 
 const char* DataInPacket::ReadData(int32 size,int32& n){

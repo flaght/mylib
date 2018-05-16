@@ -59,7 +59,8 @@ public:
 	void Write16(int16 w);
 	void Write32(int32 dw);
 	void Write64(int64 lw);
-	void WriteData(const char* buf,const int32 len);
+	void WritePtr(void* ptr);
+    void WriteData(const char* buf,const int32 len);
 	void WriteString(const char *str, int32 n);
 
 	DataOutPacket &operator <<(int8 b);
@@ -117,12 +118,13 @@ public:
 	int64 Read64();
 	int32 Read32();
 	int16 Read16();
+    void* ReadPtr();
 	const  char *ReadData(int32 &n);
 	const  char *ReadData(int32 size,int32& n);
 
 	int32 Forward(int32 delta);
 
-	inline const int32 GetLength(){
+	inline int32 GetLength() const{
 		return data_len_;
 	}
 

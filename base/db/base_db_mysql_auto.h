@@ -38,7 +38,7 @@ public:
 			engine_->Release();//释放多余记录集
 			if(!engine_->CheckConnect()){//失去连接重新连接
 				//重新创建连接
-				LOG_DEBUG("lost connection");
+				ULOG_DEBUG("lost connection");
 				if(!engine_->Connections(MysqlDBPool::addrlist_))
 					return NULL;
 			}

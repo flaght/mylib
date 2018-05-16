@@ -35,7 +35,7 @@ bool PushDBComm::GetUserBdInfo(const int64 platform,const int64 uid,base_push::B
     //call proc_GetUserBaiduPushInfo(1000,10000);
 	os<<"call proc_GetUserBaiduPushInfo("<<platform<<","<<uid<<");";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
@@ -91,7 +91,7 @@ bool PushDBComm::GetAllPushMessage(std::list<base_push::BaiduPushMessage*>& list
     //call bc.proc_GetAllPushMessage();
 	os<<"call proc_GetAllPushMessage();";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
@@ -172,7 +172,7 @@ bool PushDBComm::BindBDPushUserinfo(const int64 platform,const int64 uid,const i
 			<<"\',\'"<<tag.c_str()<<"\',\'"<<appid<<"\',\'"<<requestid<<
 			"\',"<<machine<<");";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
@@ -207,7 +207,7 @@ bool PushDBComm::BindBDPushUserinfo(const int64 platform,const int64 uid,const i
 			<<"\',\'"<<tag.c_str()<<"\',\'"<<appid<<"\',\'"<<requestid<<
 			"\',"<<machine<<");";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
@@ -234,7 +234,7 @@ bool PushDBComm::UpdateAllPushMessage(const int64 msg_id){
     //call proc_UpdateAllMessageStat(1);
 	os<<"call proc_UpdateAllMessageStat("<<msg_id<<");";
 	std::string sql = os.str();
-	LOG_DEBUG2("[%s]", sql.c_str());
+	ULOG_DEBUG2("[%s]", sql.c_str());
 	r = engine->SQLExec(sql.c_str());
 
 	if (!r) {
