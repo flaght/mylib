@@ -365,7 +365,7 @@ enum SerializerImplType{
 class ValueSerializer {
 public:
 	static ValueSerializer* Create(int32 type,std::string* str,bool pretty_print = true);
-	static ValueSerializer* Create(int32 type);
+	static ValueSerializer* Create(int32 type, bool pretty_print = false);
 
 	static void DeleteSerializer(int32 type, ValueSerializer* serializer);
 public:

@@ -72,8 +72,8 @@ Token ParseStringToken(const wchar_t* str_pos){
 /////////////////////////////////////////////////////
 static const char kpretty_print_line_ending[] = "\n";
 //json
-JsonValueSerializer::JsonValueSerializer()
-:pretty_print_(false)
+JsonValueSerializer::JsonValueSerializer(bool pretty_print)
+:pretty_print_(pretty_print)
 ,json_string_(NULL){
 
 }

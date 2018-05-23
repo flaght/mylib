@@ -1000,25 +1000,25 @@ bool ListValue::Equals(const Value* other) const {
   return true;
 }
 
-ValueSerializer* ValueSerializer::Create(int32 type) {
+ValueSerializer* ValueSerializer::Create(int32 type, bool pretty_print) {
   ValueSerializer* engine = NULL;
   switch (type) {
     case IMPL_JSON: {
-      engine = new base_logic::JsonValueSerializer();
+      engine = new base_logic::JsonValueSerializer(pretty_print);
       break;
     }
     case IMPL_XML: {
-      engine = new base_logic::XMLValueSerializer();
+      engine = new base_logic::XMLValueSerializer(pretty_print);
       break;
     }
 
     case IMPL_HTTP: {
-      engine = new base_logic::HttpValueSerializer();
+      engine = new base_logic::HttpValueSerializer(pretty_print);
       break;
     }
 
     case IMPL_JSONP: {
-      engine = new base_logic::JsonpValueSerializer();
+      engine = new base_logic::JsonpValueSerializer(pretty_print);
       break;
     }
   }

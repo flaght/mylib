@@ -10,7 +10,7 @@ namespace base_logic{
 //json
 class JsonpValueSerializer:public ValueSerializer{
 public:
-  JsonpValueSerializer();
+  JsonpValueSerializer(bool pretty_print = false);
   JsonpValueSerializer(std::string* json,bool pretty_print = true);
   virtual ~JsonpValueSerializer();
 public:

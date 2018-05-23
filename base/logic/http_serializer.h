@@ -12,7 +12,7 @@ namespace base_logic{
 class HttpValueSerializer:public ValueSerializer{
 
 public:
-	HttpValueSerializer(){}
+	HttpValueSerializer(bool pretty_print = false){}
 	virtual ~HttpValueSerializer();
 	HttpValueSerializer(std::string* http,bool pretty_print = true);
 public:

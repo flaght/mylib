@@ -26,8 +26,8 @@ inline int HexToInt(wchar_t c) {
 
 static const char kpretty_print_line_ending[] = "\n";
 
-JsonpValueSerializer::JsonpValueSerializer()
-:pretty_print_(true)
+JsonpValueSerializer::JsonpValueSerializer(bool pretty_print)
+:pretty_print_(pretty_print)
 ,stack_depth_(0)
 ,json_string_()
 ,jsonp_call_("")
