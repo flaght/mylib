@@ -155,6 +155,10 @@ bool DirectoryExists(const FilePath& path){
 	return false;
 }
 
+bool FileExists(const FilePath& filename) {
+    return !access(filename.value().c_str(), R_OK|W_OK|X_OK|F_OK);
+}
+
 bool GetDirectoryFile(const FilePath& path, std::list<FilePath>& file_list) {
 	MIG_DEBUG(USER_LEVEL,"GetDirectoryFile start");
     DIR* dir = opendir(path.value().c_str());

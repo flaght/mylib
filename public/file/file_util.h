@@ -47,6 +47,8 @@ bool CreateDirectory(const FilePath& path);
 
 bool DirectoryExists(const FilePath& path);
 
+bool FileExists(const FilePath& filename);
+
 bool GetDirectoryFile(const FilePath& path, std::list<FilePath>& file_list);
 
 }
