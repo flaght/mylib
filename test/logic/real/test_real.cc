@@ -8,8 +8,9 @@
 #include "logic/base_values.h"
 #include "basic/radom_in.h"
 #include "http/http_header.h"
+#include "basic/basic_util.h"
 #include <string>
-#include "dmg_fp/dmg_fp.h"
+//#include "dmg_fp/dmg_fp.h"
 class RealTest: public testing::Test {
 };
 
@@ -26,5 +27,7 @@ class RealTest: public testing::Test {
 
 
 TEST(RealTest, Basic){
-    double t = 100002.123111;
+    double t = 0.123111;
+    std::string tm = base::BasicUtil::StringUtil::DoubleToString(t);
+    printf("%f====>%s",t,tm.c_str());
 }
